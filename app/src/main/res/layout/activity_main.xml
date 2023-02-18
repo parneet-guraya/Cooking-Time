@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@id/unit_menu_2"
-        app:startIconDrawable="@drawable/kettle_48px"
+        app:startIconDrawable="@drawable/kettle_24px"
         >
 
         <AutoCompleteTextView
@@ -41,7 +41,7 @@
         app:layout_constraintStart_toEndOf="@+id/unit_menu_1"
         app:layout_constraintTop_toTopOf="@id/unit_menu_1"
         android:hint="@string/drop_down_menu_hint"
-        app:startIconDrawable="@drawable/weight_48px"
+        app:startIconDrawable="@drawable/weight_24px"
         >
 
         <AutoCompleteTextView
