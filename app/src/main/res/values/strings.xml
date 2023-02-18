@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Cooking Time</string>
+    <string name="drop_down_menu_hint">Enter Unit</string>
 </resources>
