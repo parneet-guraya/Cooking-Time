@@ -2,16 +2,12 @@
     <string name="app_name">Cooking Time</string>
     <string name="drop_down_menu_hint">Unit</string>
 
-    <string-array name="volume_units">
+    <string-array name="cooking_units">
+        <item>Kilogram</item>
+        <item>Gram</item>
+        <item>Milligram</item>
         <item>Litre</item>
         <item>Millilitre</item>
-        <item>decilitre</item>
-    </string-array>
-
-    <string-array name="weight_units">
-        <item>Kilogram</item>
-        <item>gram</item>
-        <item>Milligram</item>
     </string-array>
 
 </resources>
