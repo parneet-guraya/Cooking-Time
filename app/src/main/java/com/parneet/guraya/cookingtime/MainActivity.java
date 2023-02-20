@@ -2,11 +2,11 @@ package com.parneet.guraya.cookingtime;
 
 import android.os.Bundle;
 import android.text.Editable;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.parneet.guraya.cookingtime.databinding.ActivityMainBinding;
@@ -15,10 +15,12 @@ public class MainActivity extends AppCompatActivity {
 ActivityMainBinding mainBinding;
 private String fromUnit;
 private String toUnit;
-private final String LOGKEY ="MYCUSTOMTAGGURAYA";
+    private static final String TO_UNITVALUEKEY ="com.parneet.guraya.cookingtime.TO_UNITVALUEKEY";
+private static final String FROM_UNITVALUEKEY ="com.parneet.guraya.cookingtime.FROM_UNITVALUEKEY";
+private static final String RESULT_VALUEKEY ="com.parneet.guraya.cookingtime.RESULT_VALUEKEY";
 private String[] unitArr;
 
-private double resultValue = -1;
+private String resultValue;
 
 
 
@@ -28,6 +30,14 @@ private double resultValue = -1;
         mainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mainBinding.getRoot());
 
+        if(savedInstanceState != null){
+           fromUnit =  savedInstanceState.getString(FROM_UNITVALUEKEY);
+           toUnit =  savedInstanceState.getString(TO_UNITVALUEKEY);
+            resultValue = savedInstanceState.getString(RESULT_VALUEKEY);
+        }
+
+        setView();
+
         unitArr = getResources().getStringArray(R.array.cooking_units);
 
         ArrayAdapter<String> Unit1 = new ArrayAdapter<>(this,R.layout.drop_down_unit_item,unitArr);
@@ -35,7 +45,7 @@ private double resultValue = -1;
         ArrayAdapter<String> Unit2 = new ArrayAdapter<>(this,R.layout.drop_down_unit_item,unitArr);
 
         mainBinding.unitMenu1.setAdapter(Unit1);
-        mainBinding.unitMenu2.setAdapter(Unit2);
+        mainBinding.unitMenu2.setAdapter(Unit1);
 
 
         mainBinding.unitMenu1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -62,8 +72,7 @@ private double resultValue = -1;
                 if(editable!=null){
                     if(!(editable.toString().equals(""))){
                         double enterText = Double.parseDouble(editable.toString());
-                       resultValue =  new UnitConverter(fromUnit,toUnit,enterText).convertUnit();
-                        Log.d(LOGKEY,String.valueOf(resultValue));
+                        getResult(enterText);
                     }
                 }
             }
@@ -71,6 +80,25 @@ private double resultValue = -1;
 
     }
 
+    private void getResult(double enterText){
+        this.resultValue = new UnitConverter(fromUnit,toUnit,enterText).convertUnit();
+        setView();
+    }
 
+    private void setView(){
+        if(resultValue!=null){
+            mainBinding.resultView.setText(resultValue);
+        }
+        else {
+            mainBinding.resultView.setText("0.00");
+        }
+    }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(FROM_UNITVALUEKEY,fromUnit);
+        outState.putString(TO_UNITVALUEKEY,toUnit);
+        outState.putString(RESULT_VALUEKEY,resultValue);
+    }
 }

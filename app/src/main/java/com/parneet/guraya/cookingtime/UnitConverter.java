@@ -19,7 +19,7 @@ public class UnitConverter {
         this.toUnit = toUnit;
         this.enteredValue = enteredValue;
     }
-    public double convertUnit(){
+    public String convertUnit(){
 
         switch(fromUnit){
             case KILOGRAM:
@@ -42,7 +42,7 @@ public class UnitConverter {
                 conversionResult = fromMillilitre(toUnit,enteredValue);
 
         }
-        return conversionResult;
+        return formatValue(conversionResult);
     }
     private double fromKilogram(String toUnit, double enteredValue){
         double result = enteredValue;
@@ -166,4 +166,34 @@ public class UnitConverter {
         return result;
     }
 
+    private String formatValue(double conversionResult){
+        String suffixUnit;
+
+        switch (toUnit){
+            case KILOGRAM:
+                suffixUnit = "Kg";
+                break;
+
+            case GRAM:
+                suffixUnit = "g";
+                break;
+
+            case MILLIGRAM:
+                suffixUnit = "mg";
+                break;
+
+            case LITRE:
+                suffixUnit = "L";
+                break;
+
+            case MILLILITRE:
+                suffixUnit = "mL";
+                break;
+
+            default:
+                suffixUnit = "";
+                break;
+        }
+        return conversionResult+" "+suffixUnit;
+    }
 }

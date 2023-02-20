@@ -14,6 +14,6 @@
         <!-- Customize your theme here. -->
 
         <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu</item>
-
+        <item name="android:textViewStyle">@style/Widget.CookingTime.TextView.NotNight</item>
     </style>
 </resources>
